@@ -6,6 +6,8 @@
 # https://github.com/equalisysdev/PORSH/
 #
 import os
+import server
+VERSION = "0.1"
 
 print("##############################################")
 print("#             WELCOME TO PORSH               #")
@@ -19,7 +21,7 @@ while True:
     option = input("> ")
 
     if(option == "help"):
-        
+        print("\033[2J")
         print("##############################################\n")
         print("Available commands:\n")
         print("help: shows this message")
@@ -28,3 +30,14 @@ while True:
         print("start_server: starts the local server\n")
         print("exit: exits the program\n")
         print("##############################################")
+    elif(option == "version"):
+        print("\033[2J")
+        print("PORSH Client and server")
+        print(f"Version {VERSION}")
+    elif(option == "start_server"):
+        chosed_port = input("choose a port (default:8022)")
+        if(chosed_port == ""):
+            server.run_server(8022)
+        else:
+            server.run_server(chosed_port)
+        

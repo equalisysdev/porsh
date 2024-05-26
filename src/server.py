@@ -18,10 +18,11 @@ SEPARATOR = "<sep>"
 # Create a socket object
 s = socket.socket()
 
-def initialize_server(SERVER_PORT=8022):
+def initialize_server(SERVER_PORT):
     """
     Initializes the server by binding it to the specified host and port.
     """
+    print(f"Binding to {SERVER_HOST}:{SERVER_PORT}...")
     s.bind((SERVER_HOST, SERVER_PORT))
     s.listen(5)
     print(f"Listening on {SERVER_HOST}:{SERVER_PORT}")
@@ -31,6 +32,7 @@ def accept_connection():
     Accepts a connection from a client and returns the client socket.
     """
     client_socket, client_address = s.accept()
+    print(f"Connecting from {client_address}...")
     print(f"{client_address[0]}:{client_address[1]} Connected!")
     return client_socket
 
@@ -63,11 +65,11 @@ def receive_output(client_socket):
     output = client_socket.recv(BUFFER_SIZE).decode()
     return output
 
-def run_server():
+def run_server(chosed_port):
     """
     Runs the server and handles client connections.
     """
-    initialize_server()
+    initialize_server(chosed_port)
 
     while True:
         client_socket = accept_connection()
